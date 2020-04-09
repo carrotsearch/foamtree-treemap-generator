@@ -1,0 +1,15 @@
+.FoamTreeFromSpreadsheet {
+  padding: 1em;
+  box-sizing: border-box;
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: auto 24em;
+  grid-template-rows: auto;
+  grid-template-areas:
+      "visualization settings";
+}
+
+.FoamTreeFromSpreadsheet .visualization {
+  position: relative;
+}

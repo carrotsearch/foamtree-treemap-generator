@@ -1,0 +1,109 @@
+@import "~typeface-lato";
+@import "~typeface-cabin-condensed";
+
+:root {
+  --leading: 1rem;
+}
+
+body.light, body {
+  --background-color: #f4f4f4;
+  --background-color-main: white;
+  --background-color-intense: rgba(0, 0, 0, 0.07);
+  --background-color-dimmed: hsla(0, 0%, 0%, 0.07);
+  --text-color: black;
+  --text-color-inverted: white;
+  --text-color-light: rgba(0, 0, 0, 0.8);
+  --text-color-lighter: rgba(0, 0, 0, 0.5);
+  --text-color-faint: rgba(0, 0, 0, 0.15);
+  --text-color-secondary: hsl(208, 30%, 39%);
+  --link-color: hsl(203, 82%, 35%);
+  --logo-color: #1d2a4c;
+  --cluster-icon-color: #ffa64d;
+  --warning-background-color: hsla(40, 100%, 80%, 0.1);
+  --warning-border-color: hsla(40, 80%, 60%, 0.7);
+  --hr: hsla(0, 0%, 0%, 0.15);
+  --kbd-outer-border-color: var(--background-color-intense);
+  --kbd-inner-border-color: var(--background-color);
+  --kbd-background-color: var(--background-color-dimmed);
+}
+
+body.dark {
+  -webkit-font-smoothing: antialiased;
+
+  --background-color: hsl(207, 23%, 17%);
+  --background-color-main: rgba(16, 22, 26, 0.3);
+  --background-color-intense: hsl(207, 28%, 11%);
+  --background-color-dimmed: hsl(207, 23%, 22%);
+  --text-color: rgba(255, 255, 255, 1.0);
+  --text-color-light: rgba(255, 255, 255, 0.75);
+  --text-color-lighter: rgba(255, 255, 255, 0.5);
+  --text-color-faint: rgba(255, 255, 255, 0.15);
+  --text-color-secondary: hsla(208, 30%, 70%, 1.0);
+  --text-color-inverted: black;
+  --link-color: hsl(203, 85%, 61%);
+  --logo-color: var(--text-color);
+  --cluster-icon-color: #ffb366;
+  --hr: hsla(0, 0%, 100%, 0.15);
+  --kbd-outer-border-color: var(--background-color-intense);
+  --kbd-inner-border-color: hsl(207, 23%, 27%);
+  --kbd-background-color: var(--background-color-dimmed);
+}
+
+body {
+  font-family: Lato, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6, button {
+  font-family: Lato, sans-serif;
+}
+
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
+  margin-top: 0;
+}
+
+a, button.link {
+  color: var(--link-color);
+  text-underline-width: 1px;
+}
+a:hover, button.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+hr {
+  border: 1px solid var(--hr);
+  border-top: none;
+}
+
+kbd {
+  color: var(--text-color);
+  display: inline-block;
+  border: 1px solid var(--kbd-outer-border-color);
+  border-radius: 4px;
+  padding: 0.0em 0.35em;
+  margin: 0 0.2em;
+  box-shadow: 0 2px 0 var(--kbd-outer-border-color), 0 0 0 2px var(--kbd-inner-border-color) inset;
+  background-color: var(--kbd-background-color);
+}
+
+button.link {
+  color: var(--link-color) !important;
+  border: none;
+  padding: 0 !important;
+  font-size: 100%;
+  background: none !important;
+  box-shadow: none !important;
+}
+button.link:hover {
+  text-decoration: underline !important;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+sup {
+  vertical-align: 10%;
+}
