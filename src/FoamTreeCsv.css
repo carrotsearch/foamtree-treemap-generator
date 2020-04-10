@@ -1,4 +1,4 @@
-.FoamTreeFromSpreadsheet {
+.FoamTreeCsv {
   padding: 1em;
   box-sizing: border-box;
   height: 100vh;
@@ -10,6 +10,9 @@
       "visualization settings";
 }
 
-.FoamTreeFromSpreadsheet .visualization {
+.FoamTreeCsv .visualization {
   position: relative;
+}
+.FoamTreeCsv .settings {
+  padding-left: 1em;
 }
