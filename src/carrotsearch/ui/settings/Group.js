@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import RadioSetting from "./RadioSetting.js";
 import { Optional } from "../Optional.js";
 import { view } from "react-easy-state";
+import BooleanSetting from "./BooleanSetting.js";
 
 const Group = view(({ setting, get, set }) => (
     <section id={setting.id}>
@@ -19,6 +20,10 @@ const Group = view(({ setting, get, set }) => (
 const factories = {
   "group": (s, get, set) => {
     return <Group setting={s} get={get} set={set} />;
+  },
+
+  "boolean": (s, get, set) => {
+    return <BooleanSetting label={s.label} checked={get(s)} onChange={v => set(s, v)} />;
   },
 
   "enum": (s, get, set) => {

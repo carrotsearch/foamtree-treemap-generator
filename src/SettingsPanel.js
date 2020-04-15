@@ -4,9 +4,7 @@ import { view } from "react-easy-state";
 import { settingsStore } from "./stores.js";
 
 const storeGetter = (setting) => settingsStore[setting.id];
-const storeSetter = (setting, value) => {
-  return settingsStore[setting.id] = value;
-};
+const storeSetter = (setting, value) => settingsStore[setting.id] = value;
 
 const settings = {
   id: "root",
@@ -22,8 +20,9 @@ const settings = {
           ui: "radio",
           label: "Stacking",
           options: [
-            { label: "Flattened", value: "flattened" },
-            { label: "Hierarchical", value: "hierarchical" }
+            { label: "Flattened, description at the top", value: "flattened-stab" },
+            { label: "Flattened, floating description", value: "flattened-floating" },
+            { label: "Hierarchical", value: "hierarchical" },
           ]
         }
       ]
