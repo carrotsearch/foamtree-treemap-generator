@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Group from "./Group.js";
 
+import "./Settings.css";
+
 Settings.propTypes = {
   settings: PropTypes.object.isRequired,
   get: PropTypes.func.isRequired,
@@ -10,7 +12,7 @@ Settings.propTypes = {
 
 function Settings({settings, get, set}) {
   return (
-      <Group setting={settings} set={set} get={get} />
+      <Group className="Settings" setting={settings} set={set} get={get} />
   );
 }
 

@@ -24,6 +24,16 @@ const settings = {
             { label: "Flattened, floating description", value: "flattened-floating" },
             { label: "Hierarchical", value: "hierarchical" },
           ]
+        },
+        {
+          id: "layout",
+          type: "enum",
+          ui: "radio",
+          label: "Layout",
+          options: [
+            { label: "Polygonal", value: "relaxed" },
+            { label: "Rectangular", value: "squarified" },
+          ]
         }
       ]
     }

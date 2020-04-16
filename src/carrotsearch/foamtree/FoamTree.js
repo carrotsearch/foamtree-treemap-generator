@@ -12,7 +12,7 @@ FoamTree.propTypes = {
 const impl = {
   embed: (options) => new CarrotSearchFoamTree(options),
   set: (instance, ...rest) => {
-    const reloadNeeded = willChange("layout") || willChange("stacking");
+    const reloadNeeded = willChange("layout") || willChange("stacking") || willChange("descriptionGroupType");
 
     instance.set.apply(instance, rest);
     if (!rest.dataObject && rest[0] !== "dataObject") {

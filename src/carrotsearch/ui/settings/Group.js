@@ -5,8 +5,8 @@ import { Optional } from "../Optional.js";
 import { view } from "react-easy-state";
 import BooleanSetting from "./BooleanSetting.js";
 
-const Group = view(({ setting, get, set }) => (
-    <section id={setting.id}>
+const Group = view(({ setting, get, set, className }) => (
+    <section className={className}>
       <Optional visible={!!setting.label} content={() => <h4>{setting.label}</h4>}/>
 
       {
