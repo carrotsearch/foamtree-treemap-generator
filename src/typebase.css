@@ -1,0 +1,162 @@
+/*! Typebase.rework.css v0.1.0 | MIT License */
+
+/* Typesetting variables. Edit these!
+// This requires rework-vars and rework-calc */
+
+
+:root {
+  /* Base font size in pixels. */
+  --base-font-size: 16;
+
+  /* How large the line height is as a multiple of font size */
+  --base-line-height: 1.25;
+
+  --leading: calc(var(--base-line-height) * 1rem);
+
+  /* Rate of growth for headings
+     I actually like this to be slightly smaller then the leading. Makes for tight headings.
+  */
+  --scale: 1.0625;
+
+  --h1-font-size: calc(2.75 * var(--scale) * 1rem);
+  --h2-font-size: calc(2 * var(--scale) * 1rem);
+  --h3-font-size: calc(1.5 * var(--scale) * 1rem);
+  --h4-font-size: calc(1.25 * var(--scale) * 1rem);
+  --h4-line-height: calc(1.25 * var(--leading));
+  --h5-font-size: calc(1 * var(--scale) * 1rem);
+  --h6-font-size: calc(1 * var(--scale) * 1rem);
+  --small-font-size: calc(0.75 * var(--scale) * 1rem);
+  --small-line-height: calc(0.75 * var(--leading));
+  --small-leading: calc(0.75 * var(--leading));
+
+  --hr-margin: var(--leading);
+}
+
+h1, h2 {
+  word-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --h1-font-size: calc(3 * var(--scale) * 1rem);
+  }
+
+  h1, h2 {
+    word-wrap: normal;
+  }
+}
+
+/* Setup */
+
+html {
+  /* Make everything look a little nicer in webkit */
+  -webkit-font-smoothing: antialiased;
+  /* -webkit-text-size-adjust: auto
+  // -moz-text-size-adjust: auto
+  // -ms-text-size-adjust: auto
+  // -o-text-size-adjust: auto
+  // text-size-adjust: auto */
+
+}
+/* Copy & Lists */
+
+body {
+  font-size: calc(var(--base-font-size) / 16 * 100%);
+  line-height: var(--leading);
+}
+
+p {
+  margin-top: calc(1.0 * var(--leading));
+  margin-bottom: 0;
+}
+ul,
+ol {
+  margin-top: var(--leading);
+  margin-bottom: var(--leading);
+  padding-inline-start: var(--leading);
+}
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+article .warning {
+  margin-top: var(--leading);
+  margin-bottom: var(--leading);
+}
+/* Headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* Change heading typefaces here */
+  margin-top: var(--leading);
+  margin-bottom: 0;
+}
+h1 {
+  font-size: var(--h1-font-size);
+  line-height: calc(3 * var(--leading));
+  margin-top: calc(2 * var(--leading));
+}
+h2 {
+  font-size: var(--h2-font-size);
+  line-height: calc(2 * var(--leading));
+  margin-top: calc(2 * var(--leading));
+}
+h3 {
+  font-size: var(--h3-font-size);
+  line-height: calc(1.5 * var(--leading));
+  margin-top: calc(1.5 * var(--leading));
+}
+h4 {
+  font-size: var(--h4-font-size);
+  line-height: var(--h4-line-height);
+}
+h5 {
+  font-size: var(--h5-font-size);
+}
+h6 {
+  font-size: var(--h6-font-size);
+}
+
+p > small {
+  display: block;
+  font-size: var(--small-font-size);
+  line-height: var(--small-line-height);
+}
+
+small {
+  font-size: var(--small-font-size);
+  line-height: var(--small-line-height);
+}
+
+/* Tables */
+
+table {
+  margin-top: var(--leading);
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+td,
+th {
+  padding: 0;
+}
+
+/* Leading paragraph text */
+.lead {
+  font-size: calc(var(--scale) * 1rem);
+}
+
+/* Hug a the block above you */
+.hug {
+  margin-top: 0;
+}
+
+hr {
+  margin: calc(1 * var(--leading)) 0;
+}

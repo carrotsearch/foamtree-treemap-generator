@@ -49,6 +49,23 @@ describe("Worksheet2Foamtree", function () {
   });
 
   describe("must correctly parse", function () {
+    it("hierarchy structure column headers", function () {
+      const dataObject = getDataObject("level-header-convention.csv");
+      dataObject.must.eql({
+        "groups": [
+          {
+            "label": "Parent 1",
+            "groups": [
+              {
+                "label": "Child 1",
+                "intensity": 0.5
+              }
+            ]
+          }
+        ]
+      });
+    });
+
     it("one level input without properties", function () {
       const dataObject = getDataObject("one-level-no-properties.csv");
       dataObject.must.eql({

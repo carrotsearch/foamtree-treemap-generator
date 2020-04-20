@@ -9,6 +9,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-scripts": "3.4.1",
+    "react-dropzone": "10.2.2",
 
     "@blueprintjs/core": "3.24.0",
     "@nx-js/observer-util": "4.2.2",
@@ -20,7 +21,8 @@
     "xlsx": "0.15.6",
 
     "typeface-cabin-condensed": "0.0.72",
-    "typeface-lato": "0.0.75"
+    "typeface-lato": "0.0.75",
+    "typeface-raleway": "0.0.75"
   },
   "devDependencies": {
     "mocha": "7.1.1",

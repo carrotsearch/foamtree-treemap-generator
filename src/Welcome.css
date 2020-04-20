@@ -1,0 +1,69 @@
+.Welcome {
+  overflow-y: auto;
+  position: absolute;
+  top: var(--margin);
+  bottom: var(--margin);
+  right: var(--margin);
+  left: var(--margin);
+  padding: 6em 3em;
+  z-index: 1;
+  max-width: 60em;
+  margin: 0 auto;
+}
+
+.Welcome .intro {
+  text-align: center;
+}
+
+.Welcome .columns {
+  column-count: 2;
+  column-fill: balance;
+  padding-top: var(--leading)
+}
+.Welcome .columns ul,
+.Welcome .columns ul li:first-child p {
+  margin-top: 0;
+}
+
+.Welcome .spreadsheet {
+  border-collapse: collapse;
+  position: relative;
+  z-index: 1;
+  font-size: 85%;
+  line-height: 1.0;
+  margin: 2em auto;
+}
+.Welcome .spreadsheet th,
+.Welcome .spreadsheet td {
+  border: 1px solid #d4d4d4;
+  padding: 0.375em 0.5em;
+}
+.Welcome .spreadsheet th {
+  background-color: #e6e6e6;
+  border-color: #999999;
+  user-select: none;
+}
+.Welcome .spreadsheet thead th {
+  border-top: none;
+}
+.Welcome .spreadsheet th:first-child {
+  border-left: none;
+}
+.Welcome .spreadsheet thead th:first-child {
+  padding: 0;
+  width: 1.7em;
+}
+.Welcome .spreadsheet .triangle {
+  display: inline-block;
+  position: relative;
+  bottom: -2px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 1.3em 1.3em;
+  border-color: transparent transparent #b4b4b4 transparent;
+}
+.Welcome .spreadsheet tbody tr:first-child td {
+  background-color: hsl(80, 70%, 95%);
+  font-weight: bold;
+}

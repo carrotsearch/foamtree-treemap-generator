@@ -3,10 +3,12 @@ import XLSX from "xlsx";
 export const Worksheet2FoamTree = /** @constructor */ function (worksheet) {
   const log = [];
   const dataObject = {};
+  const propertyHeadings = [];
 
   this.getLog = () => log;
 
   this.getDataObject = () => dataObject;
+  this.getPropertyNames = () => propertyHeadings;
 
   const get = (r, c) => worksheet[XLSX.utils.encode_cell({ c: c, r: r })];
   const getV = (r, c) => {
@@ -30,7 +32,7 @@ export const Worksheet2FoamTree = /** @constructor */ function (worksheet) {
   }
 
   // Look for level headings, we require a specific level heading format defined below.
-  const LEVEL_HEADING_REGEX = /^Level\s+\d+$/i;
+  const LEVEL_HEADING_REGEX = /level\s+\d+/i;
   let maxLevels = 0;
   while (maxLevels <= range.e.c && LEVEL_HEADING_REGEX.test(getV(0, maxLevels))) {
     maxLevels++;
@@ -43,7 +45,6 @@ export const Worksheet2FoamTree = /** @constructor */ function (worksheet) {
   }
 
   // Headings beyond the hierarchy definitions. These will be the custom group properties.
-  const propertyHeadings = [];
   let i = maxLevels;
   while (i <= range.e.c) {
     propertyHeadings.push(getV(0, i));
