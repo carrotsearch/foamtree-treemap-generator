@@ -3,7 +3,7 @@ import { store } from 'react-easy-state';
 
 export const settingsStore = persistentStore("treemapConfig",
     {
-      "stacking": "flattened",
+      "stacking": "flattened-stab",
       "layout": "relaxed",
       "showPathInTitleBar": false
     }
