@@ -1,0 +1,5 @@
+TODO:
+
+* Display path to parent in title panel
+* Loading message
+* Log parser errors and warnings

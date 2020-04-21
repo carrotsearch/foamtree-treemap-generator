@@ -15,6 +15,8 @@ const buildOptions = ({ stacking, layout }) => {
     groupLabelVerticalPadding: 0.2,
     groupBorderWidth: 2.0,
     groupInsetWidth: 4.0,
+    groupLabelFontFamily: "Raleway, sans-serif",
+    groupLabelFontWeight: "bold",
 
     groupColorDecorator: (opts, props, vars) => {
       vars.groupColor = props.group.color;
