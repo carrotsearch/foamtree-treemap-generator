@@ -2,8 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import "./Welcome.css";
+import { ButtonLink } from "./carrotsearch/ui/ButtonLink.js";
+import { Icon } from "@blueprintjs/core";
 
-export const Welcome = ({ visible }) => {
+const ExampleLink = ({ fileName, label, onClick, children }) => {
+  return <>
+    <ButtonLink onClick={() => onClick(fileName)}>{children}</ButtonLink>&nbsp;&nbsp;
+    <a href={`examples/${fileName}`} title="download this example"><Icon icon={"download"} /></a>
+  </>;
+};
+
+export const Welcome = ({ visible, exampleClicked }) => {
   return (
       <article className="Welcome" style={{display: visible ? "block" : "none" }}>
         <div className="intro">
@@ -16,6 +25,10 @@ export const Welcome = ({ visible }) => {
           <p>
             Drag and drop a spreadsheet file into this window. Excel, OpenOffice and
             CSV files are supported.
+          </p>
+
+          <p>
+            Examples: <ExampleLink fileName="papio_anubis_anon.xlsx"onClick={exampleClicked}>protein levels</ExampleLink>
           </p>
 
           <hr/>
@@ -110,6 +123,8 @@ export const Welcome = ({ visible }) => {
             </tr>
             </tbody>
           </table>
+
+          <ExampleLink fileName="example.ods" onClick={exampleClicked}>visualize this example</ExampleLink>
         </div>
 
         <hr/>

@@ -117,16 +117,21 @@ const FoamTreeCsv = () => {
     isDragAccept
   ]);
 
-  // Load some example on start
-  useEffect(() => {
-    if (process.env.NODE_ENV !== "production") {
-      setDataObject({});
-      const name = `papio_anubis_anon.xlsx`;
+  const loadExample = useCallback(name => {
+    setDataObject({ groups: [] });
+    window.setTimeout(() => {
       fetch(`examples/${name}`)
           .then(response => response.arrayBuffer())
           .then(response => loadSpreadsheet(response, name));
-    }
+    }, 50);
   }, []);
+
+// Load some example on start
+  useEffect(() => {
+    if (process.env.NODE_ENV === "production") {
+      loadExample(`papio_anubis_anon.xlsx`);
+    }
+  }, [ loadExample ]);
 
   return (
       <div {...getRootProps({ style })}>
@@ -143,7 +148,7 @@ const FoamTreeCsv = () => {
             <OperationLog log={logStore} />
           </div>
         </main>
-        <Welcome visible={!dataObject.groups} />
+        <Welcome visible={!dataObject.groups} exampleClicked={loadExample} />
       </div>
   );
 };
