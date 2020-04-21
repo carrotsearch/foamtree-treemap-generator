@@ -5,7 +5,7 @@ import { view } from "react-easy-state";
 
 const BooleanSetting = view(({ label, checked, onChange }) => {
   return (
-      <FormGroup label={label} inline={true}>
+      <FormGroup label=" " inline={true}>
         <Checkbox checked={checked} label={label} onChange={e => onChange(e.target.checked)} />
       </FormGroup>
   );

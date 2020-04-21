@@ -107,12 +107,17 @@ kbd {
 }
 
 button.link {
+  display: inline;
+  font-family: Lato, sans-serif;
   color: var(--link-color) !important;
   border: none;
   padding: 0 !important;
   font-size: 100%;
   background: none !important;
   box-shadow: none !important;
+  min-height: auto !important;
+  position: relative;
+  top: -0.12em;
 }
 button.link:hover {
   text-decoration: underline !important;

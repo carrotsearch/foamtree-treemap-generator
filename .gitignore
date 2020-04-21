@@ -16,4 +16,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /.idea/
-/public/examples/papio_anubis.ods
+/public/examples/papio_anubis.xlsx

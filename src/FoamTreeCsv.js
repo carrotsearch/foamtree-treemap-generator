@@ -57,20 +57,19 @@ const FoamTreeCsv = () => {
     const colorProperty = firstMatching(/color/i);
 
     const dataObject = parser.getDataObject();
-    if (weightProperty) {
       forEachDescendant(dataObject, (group, parent) => {
-        if (group[weightProperty]) {
-          group.weight = group[weightProperty];
+        group.parent = parent;
+        if (weightProperty) {
+          if (group[weightProperty]) {
+            group.weight = group[weightProperty];
+          }
+          parent.weight = (parent.weight || 0) + group.weight;
         }
-        parent.weight = (parent.weight || 0) + group.weight;
+        if (colorProperty) {
+          const color = group[colorProperty];
+          group.color = color ? color : grey;
+        }
       });
-    }
-    if (colorProperty) {
-      forEachDescendant(dataObject, (group) => {
-        const color = group[colorProperty];
-        group.color = color ? color : grey;
-      });
-    }
 
     setDataObject(dataObject);
   };
@@ -107,9 +106,9 @@ const FoamTreeCsv = () => {
 
   // Load some example on start
   useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV !== "production") {
       setDataObject({});
-      fetch("examples/example.ods")
+      fetch("examples/papio_anubis_anon.xlsx")
           .then(response => response.arrayBuffer())
           .then(loadSpreadsheet);
     }
@@ -122,7 +121,7 @@ const FoamTreeCsv = () => {
             <FoamTreePanel dataObject={dataObject} />
           </div>
           <div className="settings">
-            <SettingsPanel/>
+            <SettingsPanel welcomeClicked={() => setDataObject({})}/>
           </div>
         </main>
         <Welcome visible={!dataObject.groups} />

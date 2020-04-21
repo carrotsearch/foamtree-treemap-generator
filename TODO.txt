@@ -1,5 +1,5 @@
 TODO:
 
-* Display path to parent in title panel
 * Loading message
 * Log parser errors and warnings
+* View properties of selected groups in a special panel?
