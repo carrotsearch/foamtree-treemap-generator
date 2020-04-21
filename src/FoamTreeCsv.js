@@ -128,7 +128,7 @@ const FoamTreeCsv = () => {
 
 // Load some example on start
   useEffect(() => {
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV !== "production") {
       loadExample(`papio_anubis_anon.xlsx`);
     }
   }, [ loadExample ]);
