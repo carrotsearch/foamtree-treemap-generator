@@ -1,5 +1,0 @@
-Level 1,Level 2,color,intensity
-Parent 1,Child 1,"rgba(200, 0, 0, 0.5)",0.5
-Parent 1,Child 2,"rgba(200, 0, 0, 0.5)",0.05
-Parent 2,Child 1,"rgba(0, 200, 0, 0.5)",0.3
-Parent 2,Child 2,"rgba(0, 200, 0, 0.5)",0.03
