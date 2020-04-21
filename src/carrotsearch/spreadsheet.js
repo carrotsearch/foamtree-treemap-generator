@@ -2,7 +2,7 @@ import XLSX from "xlsx";
 
 export const Worksheet2FoamTree = /** @constructor */ function (worksheet) {
   const log = [];
-  const dataObject = {};
+  const dataObject = { groups: [] };
   const propertyHeadings = [];
 
   this.getLog = () => log;

@@ -1,4 +1,5 @@
 import { persistentStore } from "./carrotsearch/util/persistent-store.js";
+import { store } from 'react-easy-state';
 
 export const settingsStore = persistentStore("treemapConfig",
     {
@@ -7,3 +8,7 @@ export const settingsStore = persistentStore("treemapConfig",
       "showPathInTitleBar": false
     }
 );
+
+export const logStore = store({
+  entries: []
+});

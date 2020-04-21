@@ -4,9 +4,13 @@ import SettingsPanel from "./SettingsPanel.js";
 import { useDropzone } from 'react-dropzone'
 import { Worksheet2FoamTree } from "./carrotsearch/spreadsheet.js";
 import { Welcome } from "./Welcome.js";
+import { OperationLog } from "./OperationLog.js";
+
+import { logStore } from "./stores.js";
 
 import XLSX from "xlsx";
 import './FoamTreeCsv.css';
+import { ButtonLink } from "./carrotsearch/ui/ButtonLink.js";
 
 const baseStyle = {
   borderWidth: 2,
@@ -47,17 +51,24 @@ const grey = "hsla(0, 0%, 90%, 0.8)";
 
 const FoamTreeCsv = () => {
   const [ dataObject, setDataObject ] = useState({});
-  const loadSpreadsheet = buffer => {
-    const workbook = XLSX.read(buffer, { type: "array" });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const parser = Worksheet2FoamTree.parse(sheet);
+  const loadSpreadsheet = (buffer, fileName) => {
+    logStore.entries.push({ message: `Parsing ${fileName}.`, code: "I001" });
+    window.setTimeout(() => {
+      const workbook = XLSX.read(buffer, { type: "array" });
+      const sheet = workbook.Sheets[workbook.SheetNames[0]];
+      const parser = Worksheet2FoamTree.parse(sheet);
+      parser.getLog()
+          .map(l => ({ code: l.code, message: Worksheet2FoamTree.getMessage(l) }))
+          .forEach(e => logStore.entries.push(e));
 
-    const firstMatching = re => parser.getPropertyNames().find(p => re.test(p));
-    const weightProperty = firstMatching(/weight/i);
-    const colorProperty = firstMatching(/color/i);
+      const firstMatching = re => parser.getPropertyNames().find(p => re.test(p));
+      const weightProperty = firstMatching(/weight/i);
+      const colorProperty = firstMatching(/color/i);
 
-    const dataObject = parser.getDataObject();
+      const dataObject = parser.getDataObject();
+      let count = 0;
       forEachDescendant(dataObject, (group, parent) => {
+        count++;
         group.parent = parent;
         if (weightProperty) {
           if (group[weightProperty]) {
@@ -71,7 +82,9 @@ const FoamTreeCsv = () => {
         }
       });
 
-    setDataObject(dataObject);
+      logStore.entries.push({ message: `Visualizing ${fileName} (${count} groups).`, code: "I002" });
+      setDataObject(dataObject);
+    }, 50);
   };
 
   const onDrop = useCallback(acceptedFiles => {
@@ -83,7 +96,7 @@ const FoamTreeCsv = () => {
 
     reader.onabort = () => console.log('file reading was aborted')
     reader.onerror = () => console.log('file reading has failed')
-    reader.onload = () => loadSpreadsheet(reader.result)
+    reader.onload = () => loadSpreadsheet(reader.result, file.name)
     reader.readAsArrayBuffer(file);
   }, [])
   const {
@@ -108,9 +121,10 @@ const FoamTreeCsv = () => {
   useEffect(() => {
     if (process.env.NODE_ENV !== "production") {
       setDataObject({});
-      fetch("examples/papio_anubis_anon.xlsx")
+      const name = `papio_anubis_anon.xlsx`;
+      fetch(`examples/${name}`)
           .then(response => response.arrayBuffer())
-          .then(loadSpreadsheet);
+          .then(response => loadSpreadsheet(response, name));
     }
   }, []);
 
@@ -122,6 +136,11 @@ const FoamTreeCsv = () => {
           </div>
           <div className="settings">
             <SettingsPanel welcomeClicked={() => setDataObject({})}/>
+            <hr/>
+            <div style={{textAlign: "right", marginBottom: "0.25em"}}>
+              <ButtonLink onClick={() => logStore.entries = []}>clear log</ButtonLink>
+            </div>
+            <OperationLog log={logStore} />
           </div>
         </main>
         <Welcome visible={!dataObject.groups} />

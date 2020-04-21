@@ -1,5 +1,4 @@
 TODO:
 
-* Loading message
-* Log parser errors and warnings
+* Choice of which weight and color column to use
 * View properties of selected groups in a special panel?

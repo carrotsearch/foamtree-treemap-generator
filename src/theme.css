@@ -5,6 +5,7 @@
 
 :root {
   --margin: var(--leading);
+  --monospace-font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
 }
 
 body.light, body {
@@ -72,7 +73,7 @@ h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, 
 }
 
 code {
-  font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
+  font-family: var(--monospace-font-family);
   color: var(--inlineCode-color);
   background-color: var(--inlineCode-background-color);
   box-shadow: inset 0 0 1px var(--inlineCode-border-color);
