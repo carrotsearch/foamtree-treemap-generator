@@ -1,4 +1,9 @@
 TODO:
 
+* Save screenshot
+* Paste CSV
+* Choose border sizes (small, medium, large, auto?)
+* Reloading currently load file?
 * Choice of which weight and color column to use
+  * Some simple weight->weight and number->color functions?
 * View properties of selected groups in a special panel?
