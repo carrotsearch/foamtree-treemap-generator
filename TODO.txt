@@ -7,4 +7,8 @@ TODO:
 * Reloading currently load file?
 * Choice of which weight and color column to use
   * Some simple weight->weight and number->color functions?
+* Extra column types for things that can be customized through decorators
+  (fill opacity, label color, font and opacity).
+* Possibility to paste a JSON with additional FoamTree options. This would override the non-advanced
+  options like border size slider.
 * View properties of selected groups in a special panel?
