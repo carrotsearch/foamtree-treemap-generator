@@ -69,3 +69,24 @@
   background-color: hsl(80, 70%, 95%);
   font-weight: bold;
 }
+
+.Welcome .Stamps {
+  text-align: center;
+}
+.Welcome .Stamp {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  font-size: 85%;
+  margin: 0 1em;
+  color: var(--text-color-light);
+}
+
+.Welcome .Stamp svg {
+  height: 2em;
+  display: block;
+  margin: 1em auto;
+}
+.Welcome .Stamp svg.FoamTree {
+  height: 2.5em;
+}
