@@ -15,6 +15,7 @@ const ExampleLink = ({ fileName, label, onClick, children }) => {
 export const Welcome = ({ visible, exampleClicked }) => {
   return (
       <article className="Welcome" style={{display: visible ? "block" : "none" }}>
+        <div>
         <div className="intro">
           <h1>Spreadsheet 🡒 FoamTree</h1>
 
@@ -190,6 +191,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
         </ul>
 
         <hr/>
+        </div>
       </article>
   );
 };

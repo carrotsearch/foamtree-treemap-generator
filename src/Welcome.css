@@ -5,8 +5,10 @@
   bottom: var(--margin);
   right: var(--margin);
   left: var(--margin);
-  padding: 6em 3em;
+  padding: 6em 0;
   z-index: 1;
+}
+.Welcome > div {
   max-width: 60em;
   margin: 0 auto;
 }
