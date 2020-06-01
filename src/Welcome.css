@@ -22,8 +22,8 @@
   column-fill: balance;
   padding-top: var(--leading)
 }
-.Welcome .columns ul,
-.Welcome .columns ul li:first-child p {
+.Welcome .columns > ul,
+.Welcome .columns > ul li:first-child p {
   margin-top: 0;
 }
 

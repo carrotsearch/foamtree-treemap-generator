@@ -49,6 +49,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 <th>C</th>
                 <th>D</th>
                 <th>E</th>
+                <th>F</th>
               </tr>
               </thead>
 
@@ -60,6 +61,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 <td>File (level 3)</td>
                 <td>File (weight)</td>
                 <td>File type (color)</td>
+                <td>Details URL</td>
               </tr>
 
               <tr>
@@ -69,6 +71,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 <td>foamtree</td>
                 <td>140</td>
                 <td>hsl(40, 80%, 60%)</td>
+                <td><a href="https://carrotsearch.com/foamtree/" rel="noopener noreferrer">https://carrotsearch.com/foamtree/</a></td>
               </tr>
 
               <tr>
@@ -78,6 +81,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 <td>circles</td>
                 <td>90</td>
                 <td>hsl(60, 80%, 60%)</td>
+                <td><a href="https://carrotsearch.com/circles/" rel="noopener noreferrer">https://carrotsearch.com/circles/</a></td>
               </tr>
 
               <tr>
@@ -87,6 +91,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 <td>dotatlas</td>
                 <td>220</td>
                 <td>hsl(90, 80%, 60%)</td>
+                <td></td>
               </tr>
 
               <tr>
@@ -96,6 +101,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 <td>lingo3g</td>
                 <td>1500</td>
                 <td>hsl(0, 80%, 60%)</td>
+                <td><a href="https://carrotsearch.com/lingo3g/" rel="noopener noreferrer">https://carrotsearch.com/lingo3g/</a></td>
               </tr>
 
               <tr>
@@ -105,6 +111,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 <td>lingo4g</td>
                 <td>2200</td>
                 <td>hsl(20, 80%, 60%)</td>
+                <td><a href="https://carrotsearch.com/lingo4g/" rel="noopener noreferrer">https://carrotsearch.com/lingo4g/</a></td>
               </tr>
 
               <tr>
@@ -114,6 +121,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 <td>carrot2</td>
                 <td>1200</td>
                 <td>hsl(50, 80%, 60%)</td>
+                <td></td>
               </tr>
 
               <tr>
@@ -123,6 +131,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 <td>hppc</td>
                 <td>800</td>
                 <td>hsl(20, 0%, 60%)</td>
+                <td></td>
               </tr>
               </tbody>
             </table>
@@ -159,19 +168,40 @@ export const Welcome = ({ visible, exampleClicked }) => {
                 </p>
               </li>
 
-              <li>
+              <li style={{ breakInside: "avoid" }}>
                 <p>
-                  <strong>Header contents conventions.</strong> The hierarchy definition columns
-                  must contain the (case-insensitive) string <code>level N</code>, where <code>N</code> is a natural number.
-                  The column to be interpreted as polygon size must contain the string <code>weight</code>.
-                  The column to be interpreted as polygon color must contain the string <code>color</code>.
+                  <strong>Header contents conventions:</strong>
                 </p>
-              </li>
 
-              <li>
-                <p>
-                  <strong>Use CSS3 strings for color specifications.</strong>
-                </p>
+                <ul>
+                  <li>
+                    <p>
+                      The hierarchy definition columns must contain the (case-insensitive)
+                      string <code>level N</code>, where <code>N</code> is a natural number.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      The first column with the <code>weight</code> string in header will be treated as group size.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      The first column with the <code>color</code> string in header will be treated as polygon
+                      color. Use CSS3 strings to define colors.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      The first column with the <code>url</code> string in header defines the URL
+                      to open in the new tab when the user clicks on the corresponding polygon.
+                    </p>
+                  </li>
+                </ul>
+
               </li>
             </ul>
           </div>
@@ -193,7 +223,7 @@ export const Welcome = ({ visible, exampleClicked }) => {
           </ul>
 
           <hr/>
-          <p class="Stamps">
+          <p className="Stamps">
             <a href="https://carrotsearch.com/foamtree/"
                title="Powered by FoamTree treemap visualization"
                className="PoweredBy Stamp"

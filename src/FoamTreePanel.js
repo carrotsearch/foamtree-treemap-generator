@@ -1,6 +1,6 @@
 import React from 'react';
 import { FoamTree } from "./carrotsearch/foamtree/FoamTree.js";
-import { settingsStore } from "./stores.js";
+import { logStore, settingsStore } from "./stores.js";
 import { view } from "react-easy-state";
 
 const buildOptions = ({ stacking, layout }) => {
@@ -21,8 +21,20 @@ const buildOptions = ({ stacking, layout }) => {
     groupLabelFontWeight: "bold",
     groupLabelMinFontSize: 0,
 
+    onGroupClick: e => {
+      if (e.group.url) {
+        window.open(e.group.url, "_blank");
+      }
+    },
+
     groupColorDecorator: (opts, props, vars) => {
       vars.groupColor = props.group.color;
+    },
+
+    groupLabelDecorator: (opts, props, vars) => {
+      if (props.group.url) {
+        vars.labelText += "\u00a0\uD83D\uDD17";
+      }
     },
 
     titleBarDecorator: (opts, props, vars) => {
@@ -46,12 +58,48 @@ const buildOptions = ({ stacking, layout }) => {
   });
 };
 
-const FoamTreePanel = view(({ dataObject }) => {
+const forEachDescendant = (parent, cb) => {
+  if (parent && parent.groups) {
+    parent.groups.forEach(g => {
+      forEachDescendant(g, cb);
+      cb(g, parent);
+    });
+  }
+};
+
+const grey = "hsla(0, 0%, 90%, 0.8)";
+
+export const prepareDataObject = (propetyNames, dataObject, log) => {
+  const firstMatching = re => propetyNames.find(p => re.test(p));
+  const weightProperty = firstMatching(/weight/i);
+  const colorProperty = firstMatching(/color/i);
+  const urlProperty = firstMatching(/url/i);
+
+  let count = 0;
+  forEachDescendant(dataObject, (group, parent) => {
+    count++;
+    group.parent = parent;
+    if (weightProperty) {
+      if (group[weightProperty]) {
+        group.weight = group[weightProperty];
+      }
+      parent.weight = (parent.weight || 0) + group.weight;
+    }
+    if (colorProperty) {
+      const color = group[colorProperty];
+      group.color = color ? color : grey;
+    }
+    if (urlProperty && group[urlProperty]) {
+      group.url = group[urlProperty];
+    }
+  });
+  return dataObject;
+};
+
+export const FoamTreePanel = view(({ dataObject }) => {
   return (
       <FoamTree dataObject={dataObject} options={buildOptions(settingsStore)} />
   );
 });
 
 FoamTreePanel.propTypes = {};
-
-export default FoamTreePanel;

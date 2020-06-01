@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import FoamTreePanel from "./FoamTreePanel.js";
+import { FoamTreePanel, prepareDataObject } from "./FoamTreePanel.js";
 import SettingsPanel from "./SettingsPanel.js";
 import { useDropzone } from 'react-dropzone'
 import { Worksheet2FoamTree } from "./carrotsearch/spreadsheet.js";
@@ -39,16 +39,6 @@ const rejectStyle = {
   borderColor: '#ff1744'
 };
 
-const forEachDescendant = (parent, cb) => {
-  if (parent && parent.groups) {
-    parent.groups.forEach(g => {
-      forEachDescendant(g, cb);
-      cb(g, parent);
-    });
-  }
-};
-const grey = "hsla(0, 0%, 90%, 0.8)";
-
 const FoamTreeCsv = () => {
   const [ dataObject, setDataObject ] = useState({});
   const loadSpreadsheet = (buffer, fileName) => {
@@ -61,26 +51,11 @@ const FoamTreeCsv = () => {
           .map(l => ({ code: l.code, message: Worksheet2FoamTree.getMessage(l) }))
           .forEach(e => logStore.entries.push(e));
 
-      const firstMatching = re => parser.getPropertyNames().find(p => re.test(p));
-      const weightProperty = firstMatching(/weight/i);
-      const colorProperty = firstMatching(/color/i);
-
-      const dataObject = parser.getDataObject();
-      let count = 0;
-      forEachDescendant(dataObject, (group, parent) => {
-        count++;
-        group.parent = parent;
-        if (weightProperty) {
-          if (group[weightProperty]) {
-            group.weight = group[weightProperty];
-          }
-          parent.weight = (parent.weight || 0) + group.weight;
-        }
-        if (colorProperty) {
-          const color = group[colorProperty];
-          group.color = color ? color : grey;
-        }
-      });
+      const propertyNames = parser.getPropertyNames();
+      const dataObject = prepareDataObject(propertyNames, parser.getDataObject());
+      const count = dataObject ? dataObject.groups.reduce(function counter(cnt, group) {
+        return cnt + 1 + (group.groups ? group.groups.reduce(counter, 0) : 0);
+      }, 0) : 0;
 
       logStore.entries.push({ message: `Visualizing ${fileName} (${count} groups).`, code: "I002" });
       setDataObject(dataObject);
@@ -129,7 +104,7 @@ const FoamTreeCsv = () => {
 // Load some example on start
   useEffect(() => {
     if (process.env.NODE_ENV !== "production") {
-      loadExample(`papio_anubis_anon.xlsx`);
+      // loadExample(`papio_anubis_anon.xlsx`);
     }
   }, [ loadExample ]);
 

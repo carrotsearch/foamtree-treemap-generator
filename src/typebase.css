@@ -75,13 +75,6 @@ ol {
   margin-bottom: var(--leading);
   padding-inline-start: var(--leading);
 }
-ul ul,
-ol ul,
-ul ol,
-ol ol {
-  margin-top: 0;
-  margin-bottom: 0;
-}
 article .warning {
   margin-top: var(--leading);
   margin-bottom: var(--leading);
