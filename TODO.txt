@@ -1,5 +1,6 @@
 TODO:
 
+* Export a standalone HTML
 * Fix layout issues
 * Save screenshot
 * Paste CSV
