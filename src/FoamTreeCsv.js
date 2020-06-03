@@ -13,18 +13,18 @@ import './FoamTreeCsv.css';
 import { ButtonLink } from "./carrotsearch/ui/ButtonLink.js";
 
 const baseStyle = {
-  borderWidth: 2,
+  borderWidth: 4,
   borderRadius: 2,
-  borderColor: '#ddd',
+  borderColor: 'transparent',
   borderStyle: 'dashed',
   background: "#fff",
   outline: 'none',
-  transition: 'border .24s ease-in-out',
   position: "absolute",
   top: "0.5em",
   bottom: "0.5em",
   left: "0.5em",
   right: "0.5em"
+  // boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)"
 };
 
 const activeStyle = {
@@ -32,7 +32,7 @@ const activeStyle = {
 };
 
 const acceptStyle = {
-  borderColor: '#00e676'
+  borderColor: 'hsl(90, 100%, 35%)'
 };
 
 const rejectStyle = {
