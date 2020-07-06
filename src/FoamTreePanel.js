@@ -1,6 +1,6 @@
 import React from 'react';
 import { FoamTree } from "./carrotsearch/foamtree/FoamTree.js";
-import { logStore, settingsStore } from "./stores.js";
+import { settingsStore } from "./stores.js";
 import { view } from "react-easy-state";
 
 const buildOptions = ({ stacking, layout }) => {
@@ -75,9 +75,7 @@ export const prepareDataObject = (propetyNames, dataObject, log) => {
   const colorProperty = firstMatching(/color/i);
   const urlProperty = firstMatching(/url/i);
 
-  let count = 0;
   forEachDescendant(dataObject, (group, parent) => {
-    count++;
     group.parent = parent;
     if (weightProperty) {
       if (group[weightProperty]) {
