@@ -45,7 +45,7 @@ const settings = {
   ]
 };
 
-const SettingsPanel = view(({ welcomeClicked }) => (
+const SettingsPanel = view(({ welcomeClicked, exportJsonClicked }) => (
     <>
       <h3>Spreadsheet 🡒 FoamTree</h3>
 
@@ -58,6 +58,12 @@ const SettingsPanel = view(({ welcomeClicked }) => (
       <hr/>
 
       <Settings settings={settings} get={storeGetter} set={storeSetter}/>
+
+      <hr/>
+
+      <p>
+        <ButtonLink onClick={e => { e.preventDefault(); exportJsonClicked() }}>Export data as FoamTree JSON</ButtonLink>
+      </p>
     </>
 ));
 

@@ -1,10 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { FoamTreePanel, prepareDataObject } from "./FoamTreePanel.js";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { FoamTreePanel, prepareDataObject, forEachDescendant } from "./FoamTreePanel.js";
 import SettingsPanel from "./SettingsPanel.js";
 import { useDropzone } from 'react-dropzone'
 import { Worksheet2FoamTree } from "./carrotsearch/spreadsheet.js";
 import { Welcome } from "./Welcome.js";
 import { OperationLog } from "./OperationLog.js";
+import { saveAs } from 'file-saver'
+import cloneDeep from "lodash.clonedeep";
 
 import { logStore } from "./stores.js";
 
@@ -101,21 +103,33 @@ const FoamTreeCsv = () => {
     }, 50);
   }, []);
 
-// Load some example on start
+  // Load some example on start
   useEffect(() => {
     if (process.env.NODE_ENV !== "production") {
       // loadExample(`papio_anubis_anon.xlsx`);
     }
   }, [ loadExample ]);
 
+  const foamTreeRef = useRef(undefined);
+  const exportJson = useCallback(() => {
+    if (foamTreeRef.current) {
+      const data = cloneDeep(foamTreeRef.current.get("dataObject"));
+      forEachDescendant(data, group => {
+        delete group["parent"];
+      });
+      saveAs(new Blob([ JSON.stringify(data, null, "  ") ],
+          { type: "application/json;charset=utf-8" }), "foamtree-data.json");
+    }
+  }, []);
+
   return (
       <div {...getRootProps({ style })}>
         <main className="FoamTreeCsv" style={{visibility: !!dataObject.groups ? "visible" : "hidden"}}>
           <div className="visualization">
-            <FoamTreePanel dataObject={dataObject} />
+            <FoamTreePanel dataObject={dataObject} foamTreeRef={foamTreeRef} />
           </div>
           <div className="settings">
-            <SettingsPanel welcomeClicked={() => setDataObject({})}/>
+            <SettingsPanel welcomeClicked={() => setDataObject({})} exportJsonClicked={exportJson}/>
             <hr/>
             <div style={{textAlign: "right", marginBottom: "0.25em"}}>
               <ButtonLink onClick={() => logStore.entries = []}>clear log</ButtonLink>

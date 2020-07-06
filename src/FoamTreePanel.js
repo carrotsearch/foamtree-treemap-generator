@@ -58,7 +58,7 @@ const buildOptions = ({ stacking, layout }) => {
   });
 };
 
-const forEachDescendant = (parent, cb) => {
+export const forEachDescendant = (parent, cb) => {
   if (parent && parent.groups) {
     parent.groups.forEach(g => {
       forEachDescendant(g, cb);
@@ -94,9 +94,9 @@ export const prepareDataObject = (propetyNames, dataObject, log) => {
   return dataObject;
 };
 
-export const FoamTreePanel = view(({ dataObject }) => {
+export const FoamTreePanel = view(({ dataObject, foamTreeRef }) => {
   return (
-      <FoamTree dataObject={dataObject} options={buildOptions(settingsStore)} />
+      <FoamTree dataObject={dataObject} options={buildOptions(settingsStore)} implRef={foamTreeRef} />
   );
 });
 
