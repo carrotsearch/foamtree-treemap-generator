@@ -106,20 +106,30 @@ const FoamTreeCsv = () => {
   // Load some example on start
   useEffect(() => {
     if (process.env.NODE_ENV !== "production") {
-      // loadExample(`papio_anubis_anon.xlsx`);
+      loadExample(`example.ods`);
     }
   }, [ loadExample ]);
 
   const foamTreeRef = useRef(undefined);
-  const exportJson = useCallback(() => {
+
+  const exportFoamTreeData = (extesion, fn = x => x) => {
     if (foamTreeRef.current) {
       const data = cloneDeep(foamTreeRef.current.get("dataObject"));
       forEachDescendant(data, group => {
         delete group["parent"];
       });
-      saveAs(new Blob([ JSON.stringify(data, null, "  ") ],
-          { type: "application/json;charset=utf-8" }), "foamtree-data.json");
+      saveAs(new Blob([ fn(JSON.stringify(data, null, "  ")) ],
+          { type: "application/json;charset=utf-8" }), `foamtree-data.${extesion}`);
     }
+  };
+
+  const exportJson = useCallback(() => {
+    exportFoamTreeData("json");
+  }, []);
+  const exportJsonP = useCallback(() => {
+    exportFoamTreeData("js",json => {
+      return `modelDataAvailable(${json})`;
+    });
   }, []);
 
   return (
@@ -129,7 +139,8 @@ const FoamTreeCsv = () => {
             <FoamTreePanel dataObject={dataObject} foamTreeRef={foamTreeRef} />
           </div>
           <div className="settings">
-            <SettingsPanel welcomeClicked={() => setDataObject({})} exportJsonClicked={exportJson}/>
+            <SettingsPanel welcomeClicked={() => setDataObject({})}
+                           exportJsonClicked={exportJson} exportJsonPClicked={exportJsonP} />
             <hr/>
             <div style={{textAlign: "right", marginBottom: "0.25em"}}>
               <ButtonLink onClick={() => logStore.entries = []}>clear log</ButtonLink>

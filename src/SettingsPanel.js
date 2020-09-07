@@ -3,6 +3,7 @@ import Settings from "./carrotsearch/ui/settings/Settings.js";
 import { view } from "react-easy-state";
 import { settingsStore } from "./stores.js";
 import { ButtonLink } from "./carrotsearch/ui/ButtonLink.js";
+import { FormGroup } from "@blueprintjs/core";
 
 const storeGetter = (setting) => settingsStore[setting.id];
 const storeSetter = (setting, value) => settingsStore[setting.id] = value;
@@ -45,7 +46,7 @@ const settings = {
   ]
 };
 
-const SettingsPanel = view(({ welcomeClicked, exportJsonClicked }) => (
+const SettingsPanel = view(({ welcomeClicked, exportJsonClicked, exportJsonPClicked }) => (
     <>
       <h3>Spreadsheet 🡒 FoamTree</h3>
 
@@ -61,9 +62,14 @@ const SettingsPanel = view(({ welcomeClicked, exportJsonClicked }) => (
 
       <hr/>
 
-      <p>
-        <ButtonLink onClick={e => { e.preventDefault(); exportJsonClicked() }}>Export data as FoamTree JSON</ButtonLink>
-      </p>
+      <div className="Settings">
+        <FormGroup label="Export as" inline={true}>
+          <div style={{ lineHeight: "30px"}}>
+            <ButtonLink onClick={e => { e.preventDefault(); exportJsonClicked() }}>FoamTree JSON (*.json)</ButtonLink>
+            <ButtonLink onClick={e => { e.preventDefault(); exportJsonPClicked() }}>FoamTree JSON-P (*.js)</ButtonLink>
+          </div>
+        </FormGroup>
+      </div>
     </>
 ));
 
